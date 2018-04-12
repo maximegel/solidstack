@@ -1,0 +1,174 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using SolidStack.Core.Guards.Internal;
+
+namespace SolidStack.Core.Guards
+{
+    /// <summary>
+    ///     <para>
+    ///         Provides guard clauses that allow you to write pre-conditions and post-conditions for your methods in a
+    ///         readable way.
+    ///     </para>
+    ///     <para>
+    ///         <see
+    ///             href="https://github.com/idmobiles/solidstack/wiki/SolidStack.Core.Guards#protecting-your-methods-with-the-guard-class" />
+    ///     </para>
+    /// </summary>
+    public static class Guard
+    {
+        /// <summary>
+        ///     Checks for a method post-condition; if the condition is false, displays an error message.
+        /// </summary>
+        /// <remarks>
+        ///     The check will be performed in trigger mode only to avoid affecting performance.
+        /// </remarks>
+        /// <param name="predicate">The condition to validate.</param>
+        /// <param name="message">The error message to display.</param>
+        [Conditional("DEBUG")]
+        public static void Ensures(Func<bool> predicate, string message) =>
+            Debug.Assert(predicate(), message);
+
+        /// <summary>
+        ///     Checks for a method post-condition against all items in a sequence; if any condition is false, displays an error
+        ///     message.
+        /// </summary>
+        /// <remarks>
+        ///     The check will be performed in "release" mode only to avoid affecting performance.
+        /// </remarks>
+        /// <typeparam name="T">The type of the sequence items.</typeparam>
+        /// <param name="sequence">The sequence to check.</param>
+        /// <param name="predicate">The condition to validate.</param>
+        /// <param name="message">The error message to display.</param>
+        [Conditional("DEBUG")]
+        public static void EnsuresAll<T>(
+            IEnumerable<T> sequence,
+            Func<T, bool> predicate, string message)
+        {
+            foreach (var item in sequence)
+                Requires(() => predicate(item), message);
+        }
+
+        /// <summary>
+        ///     Checks for a method post-condition against all items in a sequence; if all conditions are false, displays an error
+        ///     message.
+        /// </summary>
+        /// <remarks>
+        ///     The check will be performed in "release" mode only to avoid affecting performance.
+        /// </remarks>
+        /// <typeparam name="T">The type of the sequence items.</typeparam>
+        /// <param name="sequence">The sequence to check.</param>
+        /// <param name="predicate">The condition to validate.</param>
+        /// <param name="message">The error message to display.</param>
+        [Conditional("DEBUG")]
+        public static void EnsuresAny<T>(
+            IEnumerable<T> sequence,
+            Func<T, bool> predicate, string message) =>
+            Ensures(() => sequence.Any(predicate), message);
+
+        /// <summary>
+        ///     Checks if a value is null as a method post-condition; if the value is null, displays an error message.
+        /// </summary>
+        /// <remarks>
+        ///     The check will be performed in "release" mode only to avoid affecting performance.
+        /// </remarks>
+        /// <typeparam name="T">The type of the value to check.</typeparam>
+        /// <param name="value">The value to check.</param>
+        /// <param name="message">The error message to display.</param>
+        [Conditional("DEBUG")]
+        public static void EnsuresNonNull<T>(T value, string message) =>
+            Ensures(() => value != null, message);
+
+        /// <summary>
+        ///     Checks if a sequence contains null items as a method post-condition; if any item is null, displays an error
+        ///     message.
+        /// </summary>
+        /// <remarks>
+        ///     The check will be performed in "release" mode only to avoid affecting performance.
+        /// </remarks>
+        /// <typeparam name="T">The type of the sequence items.</typeparam>
+        /// <param name="sequence">The sequence to check.</param>
+        /// <param name="message">The error message to display.</param>
+        [Conditional("DEBUG")]
+        public static void EnsuresNoNullIn<T>(IEnumerable<T> sequence, string message) =>
+            EnsuresAll(sequence, item => item != null, message);
+
+        /// <summary>
+        ///     Checks for a method pre-condition; if the condition is false, displays an error message.
+        /// </summary>
+        /// <remarks>
+        ///     The check will be performed in trigger mode only to avoid affecting performance.
+        /// </remarks>
+        /// <param name="predicate">The condition to validate.</param>
+        /// <param name="message">The error message to display.</param>
+        /// <exception cref="GuardClauseException"></exception>
+        public static void Requires(Func<bool> predicate, string message)
+        {
+            if (predicate())
+                return;
+
+            Debug.Fail(message);
+            throw new GuardClauseException(message);
+        }
+
+        /// <summary>
+        ///     Checks for a method pre-condition against all items in a sequence; if any condition is false, displays an error
+        ///     message.
+        /// </summary>
+        /// <remarks>
+        ///     The check will be performed in "release" mode only to avoid affecting performance.
+        /// </remarks>
+        /// <typeparam name="T">The type of the sequence items.</typeparam>
+        /// <param name="sequence">The sequence to check.</param>
+        /// <param name="predicate">The condition to validate.</param>
+        /// <param name="message">The error message to display.</param>
+        [Conditional("DEBUG")]
+        public static void RequiresAll<T>(
+            IEnumerable<T> sequence,
+            Func<T, bool> predicate, string message)
+        {
+            foreach (var item in sequence)
+                Requires(() => predicate(item), message);
+        }
+
+        /// <summary>
+        ///     Checks for a method pre-condition against all items in a sequence; if all conditions are false, displays an error
+        ///     message.
+        /// </summary>
+        /// <remarks>
+        ///     The check will be performed in "release" mode only to avoid affecting performance.
+        /// </remarks>
+        /// <typeparam name="T">The type of the sequence items.</typeparam>
+        /// <param name="sequence">The sequence to check.</param>
+        /// <param name="predicate">The condition to validate.</param>
+        /// <param name="message">The error message to display.</param>
+        [Conditional("DEBUG")]
+        public static void RequiresAny<T>(
+            IEnumerable<T> sequence,
+            Func<T, bool> predicate, string message) =>
+            Requires(() => sequence.Any(predicate), message);
+
+        /// <summary>
+        ///     Checks if a value is null as a method post-condition; if the value is null, displays an error message.
+        /// </summary>
+        /// <typeparam name="T">The type of the value to check.</typeparam>
+        /// <param name="value">The value to check.</param>
+        /// <param name="variableName">The variable name of the value to check.</param>
+        public static void RequiresNonNull<T>(T value, string variableName) =>
+            Requires(() => value != null, $"Receiving null {variableName}.");
+
+        /// <summary>
+        ///     Checks if a sequence contains null items as a method pre-condition; if any item is null, displays an error message.
+        /// </summary>
+        /// <remarks>
+        ///     The check will be performed in "release" mode only to avoid affecting performance.
+        /// </remarks>
+        /// <typeparam name="T">The type of the sequence items.</typeparam>
+        /// <param name="sequence">The sequence to check.</param>
+        /// <param name="variableName">The variable of the sequence to check.</param>
+        [Conditional("DEBUG")]
+        public static void RequiresNoNullIn<T>(IEnumerable<T> sequence, string variableName) =>
+            RequiresAll(sequence, item => item != null, $"Receiving {variableName} containing one or more null items.");
+    }
+}

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2024
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidStack.Core.Guards", "SolidStack.Core.Guards\SolidStack.Core.Guards.csproj", "{0C7E071B-021D-48F3-9306-A10B38A034D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolidStack.Core.Guards.Tests", "SolidStack.Core.Guards.Tests\SolidStack.Core.Guards.Tests.csproj", "{3F4308F7-20C6-4E5E-BB94-8681BEEF3E3A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C7E071B-021D-48F3-9306-A10B38A034D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C7E071B-021D-48F3-9306-A10B38A034D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C7E071B-021D-48F3-9306-A10B38A034D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C7E071B-021D-48F3-9306-A10B38A034D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F4308F7-20C6-4E5E-BB94-8681BEEF3E3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F4308F7-20C6-4E5E-BB94-8681BEEF3E3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F4308F7-20C6-4E5E-BB94-8681BEEF3E3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F4308F7-20C6-4E5E-BB94-8681BEEF3E3A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A31C7CBE-244A-4FA0-9D34-B202D205602E}
+	EndGlobalSection
+EndGlobal
