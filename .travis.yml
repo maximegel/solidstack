@@ -1,7 +1,7 @@
 language: csharp
 mono: none
-dotnet: 2.0.0
+dotnet: $DOTNET_VERSION
 script: 
   - dotnet restore ./src
-  - dotnet build ./**/*.csproj --configuration Release
-  - dotnet test ./**/*Tests*.csproj
+  - dotnet build ./src/SolidStack.Core.Guards/SolidStack.Core.Guards.csproj --configuration $CONFIGURATION
+  - dotnet test ./src/SolidStack.Core.Guards/SolidStack.Core.Guards.csproj --configuration $CONFIGURATION
