@@ -28,7 +28,7 @@ namespace SolidStack.Core.Guards
         /// <param name="message">The error message to display.</param>
         [Conditional("DEBUG")]
         public static void Ensures(Func<bool> predicate, string message) =>
-            Debug.Assert(predicate(), message);
+            Assert(predicate, message);
 
         /// <summary>
         ///     Checks for a method post-condition against all items in a sequence; if any condition is false, displays an error
@@ -44,11 +44,8 @@ namespace SolidStack.Core.Guards
         [Conditional("DEBUG")]
         public static void EnsuresAll<T>(
             IEnumerable<T> sequence,
-            Func<T, bool> predicate, string message)
-        {
-            foreach (var item in sequence)
-                Requires(() => predicate(item), message);
-        }
+            Func<T, bool> predicate, string message) =>
+            Assert(() => sequence.All(predicate), message);
 
         /// <summary>
         ///     Checks for a method post-condition against all items in a sequence; if all conditions are false, displays an error
@@ -103,14 +100,8 @@ namespace SolidStack.Core.Guards
         /// <param name="predicate">The condition to validate.</param>
         /// <param name="message">The error message to display.</param>
         /// <exception cref="GuardClauseException"></exception>
-        public static void Requires(Func<bool> predicate, string message)
-        {
-            if (predicate())
-                return;
-
-            Debug.Fail(message);
-            throw new GuardClauseException(message);
-        }
+        public static void Requires(Func<bool> predicate, string message) =>
+            Assert(predicate, message);
 
         /// <summary>
         ///     Checks for a method pre-condition against all items in a sequence; if any condition is false, displays an error
@@ -126,11 +117,8 @@ namespace SolidStack.Core.Guards
         [Conditional("DEBUG")]
         public static void RequiresAll<T>(
             IEnumerable<T> sequence,
-            Func<T, bool> predicate, string message)
-        {
-            foreach (var item in sequence)
-                Requires(() => predicate(item), message);
-        }
+            Func<T, bool> predicate, string message) => 
+            Assert(() => sequence.All(predicate), message);
 
         /// <summary>
         ///     Checks for a method pre-condition against all items in a sequence; if all conditions are false, displays an error
@@ -170,5 +158,13 @@ namespace SolidStack.Core.Guards
         [Conditional("DEBUG")]
         public static void RequiresNoNullIn<T>(IEnumerable<T> sequence, string variableName) =>
             RequiresAll(sequence, item => item != null, $"Receiving {variableName} containing one or more null items.");
+
+        private static void Assert(Func<bool> predicate, string message)
+        {
+            if (predicate())
+                return;
+
+            throw new GuardClauseException(message);
+        }
     }
 }
