@@ -15,7 +15,7 @@
 
 # What is SolidStack?
 
-SolidStack is a .NET framework consisting of several well-divided NuGet packages that allow you to focus on business logic by providing an implementation of very general design patterns useful in every kind of applications such as the [*Option Pattern*][option-pattern-url], the [*Builder Pattern*][builder-pattern-url], the [*Repository Pattern*][repository-pattern-url], the [*Unit of Work Pattern*][unit-of-work-pattern-url] and so more. In short, if you're tired of duplicated and unreadable code, this framework if for you!
+SolidStack is a .NET framework consisting of several well-divided NuGet packages that allow you to focus on business logic by providing an implementation of very general design patterns useful in every kind of applications such as the [*Option Pattern*][option-pattern-url], the [*Builder Pattern*][builder-pattern-url], the [*Repository Pattern*][repository-pattern-url], the [*Unit of Work Pattern*][unit-of-work-pattern-url] and so more. In short, if you're tired of duplicated and unreadable code, this framework is for you!
 
 ## Available NuGet packages
 
