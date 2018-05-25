@@ -5,14 +5,14 @@
     <version>$version$</version>
     <description>SolidStack.Core.Guards is an extremely simple, unambiguous and lightweight guard clause library.</description>
     <authors>$authors$</authors>
-    <title>SolidStack</title>
+    <title>$title$</title>
     <projectUrl>$projectUrl$</projectUrl>
     <licenseUrl>$licenseUrl$</licenseUrl>
     <iconUrl>$iconUrl$</iconUrl>
     <requireLicenseAcceptance>$requireLicenseAcceptance$</requireLicenseAcceptance>
     <!--<releaseNotes>$releaseNotes$</releaseNotes>-->
     <copyright>$copyright$</copyright>
-    <tags>SolidStack Core Guard Clause</tags>
+    <tags>SolidStack GuardClauses Preconditions Postconditions DesignByContract DbC</tags>
   </metadata>
   <files>
     <file src="bin\$configuration$\netstandard2.0\SolidStack.Core.Guards.dll" target="lib\netstandard2.0"/>

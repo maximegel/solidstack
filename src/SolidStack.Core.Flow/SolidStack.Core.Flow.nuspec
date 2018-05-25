@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>SolidStack.Core.Flow</id>
+    <version>$version$</version>
+    <description>SolidStack.Core.Guards focuses on encapsulating the branching logic of your code so you can write a linear and much more readable code flow without having to deal with exceptions, null checks and unnecessary conditions.</description>
+    <authors>$authors$</authors>
+    <title>$title$</title>
+    <projectUrl>$projectUrl$</projectUrl>
+    <licenseUrl>$licenseUrl$</licenseUrl>
+    <iconUrl>$iconUrl$</iconUrl>
+    <requireLicenseAcceptance>$requireLicenseAcceptance$</requireLicenseAcceptance>
+    <!--<releaseNotes>$releaseNotes$</releaseNotes>-->
+    <copyright>$copyright$</copyright>
+    <tags>SolidStack Flow OptionPattern ResultPattern EitherPattern RailwayOrientedProgramming FunctionalProgramming</tags>
+  </metadata>
+  <files>
+    <file src="bin\$configuration$\netstandard2.0\SolidStack.Core.Flow.dll" target="lib\netstandard2.0"/>
+  </files>
+</package>

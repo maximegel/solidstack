@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SolidStack.Core.Guards.Internal
+namespace SolidStack.Core.Guards
 {
     /// <inheritdoc />
     /// <summary>
