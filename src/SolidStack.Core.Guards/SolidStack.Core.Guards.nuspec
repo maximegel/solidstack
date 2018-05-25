@@ -5,7 +5,7 @@
     <version>$version$</version>
     <description>SolidStack.Core.Guards is an extremely simple, unambiguous and lightweight guard clause library.</description>
     <authors>$authors$</authors>
-    <title>SolidStack</title>
+    <title>$title$</title>
     <projectUrl>$projectUrl$</projectUrl>
     <licenseUrl>$licenseUrl$</licenseUrl>
     <iconUrl>$iconUrl$</iconUrl>

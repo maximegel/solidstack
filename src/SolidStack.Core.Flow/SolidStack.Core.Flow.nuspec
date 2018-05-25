@@ -5,7 +5,7 @@
     <version>$version$</version>
     <description>SolidStack.Core.Guards focuses on encapsulating the branching logic of your code so you can write a linear and much more readable code flow without having to deal with exceptions, null checks and unnecessary conditions.</description>
     <authors>$authors$</authors>
-    <title>SolidStack</title>
+    <title>$title$</title>
     <projectUrl>$projectUrl$</projectUrl>
     <licenseUrl>$licenseUrl$</licenseUrl>
     <iconUrl>$iconUrl$</iconUrl>
