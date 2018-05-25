@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="SolidStack.Core.Flow.nuspec" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SolidStack.Core.Guards\SolidStack.Core.Guards.csproj" />
+  </ItemGroup>
+
+</Project>
