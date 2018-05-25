@@ -52,7 +52,7 @@ Check out our [wiki][docs-url] to explore the documentation provided for the pac
 
 # Where can I get it?
 
-First, [install NuGet][nuget-install-url].  Then, install the required NuGet packages avalaible on [nuget.org][nuget-idmobiles-url] using the package manager console:
+First, [install NuGet][nuget-install-url].  Then, install the required NuGet packages avalaible on [nuget.org][nuget-softframe-url] using the package manager console:
 
 ```
 PM> Install-Package <PackageName>
@@ -84,18 +84,18 @@ SolidStack is Copyright © 2018 SoftFrame under the [MIT license][license-url].
 <!-- Resources: -->
 [builder-pattern-url]: http://www.codinghelmet.com/?path=howto/advances-in-applying-the-builder-design-pattern
 [build-status-badge]: https://img.shields.io/travis/softframe/solidstack.svg?style=flat-square
-[build-url]: https://idmobiles.visualstudio.com/solidstack/_build/index?definitionId=10
-[changelog-url]: https://github.com/idmobiles/solidstack/releases
-[develop-branch-url]: https://github.com/idmobiles/solidstack/tree/develop
-[docs-url]: https://github.com/idmobiles/solidstack/wiki
+[build-url]: https://travis-ci.org/softframe/solidstack
+[changelog-url]: https://github.com/softframe/solidstack/releases
+[develop-branch-url]: https://github.com/softframe/solidstack/tree/develop
+[docs-url]: https://github.com/softframe/solidstack/wiki
 [ddd-url]: https://en.wikipedia.org/wiki/Domain-driven_design
-[github-release-badge]: https://img.shields.io/github/release/idmobiles/solidstack.svg?style=flat-square
-[issues-url]: https://github.com/idmobiles/solidstack/issues
-[github-release-url]: https://github.com/idmobiles/solidstack/releases
+[github-release-badge]: https://img.shields.io/github/release/softframe/solidstack.svg?style=flat-square
+[issues-url]: https://github.com/softframe/solidstack/issues
+[github-release-url]: https://github.com/softframe/solidstack/releases
 [guard-clauses-url]: https://medium.com/softframe/what-are-guard-clauses-and-how-to-use-them-350c8f1b6fd2
 [license-badge]: https://img.shields.io/badge/license-MIT-orange.svg?style=flat-square
-[license-url]: https://github.com/idmobiles/solidstack/blob/master/LICENSE
-[new-issue-url]: https://github.com/idmobiles/solidstack/issues/new
+[license-url]: https://github.com/softframe/solidstack/blob/master/LICENSE
+[new-issue-url]: https://github.com/softframe/solidstack/issues/new
 [nuget-packages-url]: https://www.nuget.org/profiles/softframe
 [nuget-install-url]: http://docs.nuget.org/docs/start-here/installing-nuget
 [option-pattern-url]: http://www.codinghelmet.com/?path=howto/understanding-the-option-maybe-functional-type
