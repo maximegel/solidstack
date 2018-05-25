@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidStack.Testing.Xunit", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidStack.Core.Flow", "SolidStack.Core.Flow\SolidStack.Core.Flow.csproj", "{193DDAA2-AD28-4892-B6D9-C155EA6BA698}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolidStack.Core.Flow.Tests", "SolidStack.Core.Flow.Tests\SolidStack.Core.Flow.Tests.csproj", "{C0E17594-BC69-4D31-ABD8-E74773D2CAD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidStack.Core.Flow.Tests", "SolidStack.Core.Flow.Tests\SolidStack.Core.Flow.Tests.csproj", "{C0E17594-BC69-4D31-ABD8-E74773D2CAD1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{AD1E680F-CAD7-4F71-A153-010E963A8685}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{50EFF3CA-6249-4DEB-9CAC-D71C1DFFD922}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +46,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0C7E071B-021D-48F3-9306-A10B38A034D8} = {AD1E680F-CAD7-4F71-A153-010E963A8685}
+		{3F4308F7-20C6-4E5E-BB94-8681BEEF3E3A} = {AD1E680F-CAD7-4F71-A153-010E963A8685}
+		{5AE73D94-930C-4AA3-AA1D-704B9B28FB5C} = {50EFF3CA-6249-4DEB-9CAC-D71C1DFFD922}
+		{193DDAA2-AD28-4892-B6D9-C155EA6BA698} = {AD1E680F-CAD7-4F71-A153-010E963A8685}
+		{C0E17594-BC69-4D31-ABD8-E74773D2CAD1} = {AD1E680F-CAD7-4F71-A153-010E963A8685}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A31C7CBE-244A-4FA0-9D34-B202D205602E}
