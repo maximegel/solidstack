@@ -52,7 +52,7 @@ Check out our [wiki][docs-url] to explore the documentation provided for the pac
 
 # Where can I get it?
 
-First, [install NuGet][nuget-install-url].  Then, install the required NuGet packages avalaible on [nuget.org][nuget-softframe-url] using the package manager console:
+First, [install NuGet][nuget-install-url].  Then, install the required NuGet packages avalaible on [nuget.org][nuget-packages-url] using the package manager console:
 
 ```
 PM> Install-Package <PackageName>
