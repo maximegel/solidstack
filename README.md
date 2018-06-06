@@ -25,7 +25,7 @@ The `SolidStack.Core` namespace is the central point of all SolidStack packages,
 
 Package | Description
 ------- | -----------
-[SolidStack.Core.Guards][solidstack.core.guards-page] | `SolidStack.Core.Guards`  is an extremely simple, unambiguous and lightweight [*guard clause*][guard-clauses-url] library.
+[SolidStack.Core.Guards][solidstack.core.guards-page] | `SolidStack.Core.Guards` is an extremely simple, unambiguous and lightweight [*guard clause*][guard-clauses-url] library that allow you to write pre-conditions and post-conditions for your methods in a readable way.
 [SolidStack.Core.Flow][solidstack.core.flow-page] | `SolidStack.Core.Flow` focuses on encapsulating the branching logic of your code so you can write a linear and much more readable code flow without having to deal with exceptions, null checks and unnecessary conditions.
 SolidStack.Core.Equality (coming soon...) | `SolidStack.Core.Equality` is primarily useful when you have to tweak the equality of an object to implement the [*Value Object Pattern*][value-object-pattern-url]. All you have to do is use one of the provided abstract classes and the complex equality logic will be done for you.
 SolidStack.Core.Construction (coming soon...) | `SolidStack.Core.Construction`'s only responsibility is to help you construct objects. You can use the [*Builder Pattern*][builder-pattern-url] provided implementation to build complex objects in a fluent way.
