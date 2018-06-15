@@ -168,7 +168,15 @@ namespace SolidStack.Core.Flow.Tests
         {
             var result = Result<object, object>.Error("error");
 
-            var mappedResult =
+            var mappedResultA =
+                result
+                    .WhenError()
+                    .MapTo(x => 1)
+                    .WhenSuccess()
+                    .MapTo(x => 0)
+                    .Map();
+
+            var mappedResultB =
                 result
                     .WhenError<int>()
                     .MapTo(x => 2)
@@ -178,7 +186,17 @@ namespace SolidStack.Core.Flow.Tests
                     .MapTo(x => 0)
                     .Map();
 
-            mappedResult.Should().Be(1);
+            var mappedResultC =
+                result
+                    .WhenSuccess()
+                    .MapTo(x => 0)
+                    .WhenError()
+                    .MapTo(x => 1)
+                    .Map();
+
+            mappedResultA.Should().Be(1);
+            mappedResultB.Should().Be(1);
+            mappedResultC.Should().Be(1);
         }
 
         [Fact]
@@ -222,7 +240,7 @@ namespace SolidStack.Core.Flow.Tests
         {
             var result = Result<string, string>.Success("success");
 
-            var mappedResult =
+            var mappedResultA =
                 result
                     .WhenSuccess()
                     .MapTo(x => 0)
@@ -230,7 +248,16 @@ namespace SolidStack.Core.Flow.Tests
                     .MapTo(x => 1)
                     .Map();
 
-            mappedResult.Should().Be(0);
+            var mappedResultB =
+                result
+                    .WhenError()
+                    .MapTo(x => 1)
+                    .WhenSuccess()
+                    .MapTo(x => 0)
+                    .Map();
+
+            mappedResultA.Should().Be(0);
+            mappedResultB.Should().Be(0);
         }
 
         [Fact]

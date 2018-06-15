@@ -3,7 +3,7 @@
 namespace SolidStack.Core.Flow.Internal.Result
 {
     internal class UnresolvedMappableError<TError, TSuccess, TMappingDestination> : MappableContent<
-            ResolvedMappableSuccess<TError, TSuccess, TMappingDestination>, TSuccess, TMappingDestination>,
+            UnresolvedMappableError<TError, TSuccess, TMappingDestination>, TSuccess, TMappingDestination>,
         IMappableError<TError, TSuccess, TMappingDestination>
     {
         public UnresolvedMappableError(TSuccess content) :
