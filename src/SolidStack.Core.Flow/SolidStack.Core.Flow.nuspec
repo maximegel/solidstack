@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$id$</id>
+    <id>SolidStack.Core.Flow</id>
     <version>$version$</version>
-    <description>$id$ focuses on encapsulating the branching logic of your code so you can write a linear and much more readable code flow without having to deal with exceptions, null checks and unnecessary conditions.</description>
+    <description>SolidStack.Core.Flow focuses on encapsulating the branching logic of your code so you can write a linear and much more readable code flow without having to deal with exceptions, null checks and unnecessary conditions.</description>
     <authors>$authors$</authors>
     <title>$title$</title>
     <projectUrl>$projectUrl$</projectUrl>
@@ -14,10 +14,10 @@
     <copyright>$copyright$</copyright>
     <tags>SolidStack Flow OptionPattern ResultPattern EitherPattern RailwayOrientedProgramming FunctionalProgramming</tags>
     <dependencies>
-      <dependency id="SolidStack.Core.Guards"/>
+      <dependency id="SolidStack.Core.Flow"/>
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\$configuration$\netstandard2.0\$id$.dll" target="lib\netstandard2.0"/>
+    <file src="bin\$configuration$\netstandard2.0\SolidStack.Core.Flow.dll" target="lib\netstandard2.0"/>
   </files>
 </package>
