@@ -27,7 +27,7 @@ Package | Description
 ------- | -----------
 [SolidStack.Core.Guards][solidstack.core.guards-page] | `SolidStack.Core.Guards` is an extremely simple, unambiguous and lightweight [*guard clause*][guard-clauses-url] library that allow you to write pre-conditions and post-conditions for your methods in a readable way.
 [SolidStack.Core.Flow][solidstack.core.flow-page] | `SolidStack.Core.Flow` focuses on encapsulating the branching logic of your code so you can write a linear and much more readable code flow without having to deal with exceptions, null checks and unnecessary conditions.
-SolidStack.Core.Equality (coming soon...) | `SolidStack.Core.Equality` is primarily useful when you have to tweak the equality of an object to implement the [*Value Object Pattern*][value-object-pattern-url]. All you have to do is use one of the provided abstract classes and the complex equality logic will be done for you.
+[SolidStack.Core.Equality][solidstack.core.equality-page] | `SolidStack.Core.Equality` is primarily useful when you have to tweak the equality of an object to implement the [*Value Object Pattern*][value-object-pattern-url]. All you have to do is use one of the provided abstract classes and the complex equality logic will be done for you.
 SolidStack.Core.Construction (coming soon...) | `SolidStack.Core.Construction`'s only responsibility is to help you construct objects. You can use the [*Builder Pattern*][builder-pattern-url] provided implementation to build complex objects in a fluent way.
 
 ### SolidStack.Domain (coming soon...)
@@ -100,6 +100,7 @@ SolidStack is Copyright © 2018 SoftFrame under the [MIT license][license-url].
 [nuget-install-url]: http://docs.nuget.org/docs/start-here/installing-nuget
 [option-pattern-url]: http://www.codinghelmet.com/?path=howto/understanding-the-option-maybe-functional-type
 [repository-pattern-url]: https://martinfowler.com/eaaCatalog/repository.html
+[solidstack.core.equality-page]: https://github.com/softframe/solidstack/wiki/SolidStack.Core.Equality
 [solidstack.core.guards-page]: https://github.com/softframe/solidstack/wiki/SolidStack.Core.Guards
 [solidstack.core.flow-page]: https://github.com/softframe/solidstack/wiki/SolidStack.Core.Flow
 [unit-of-work-pattern-url]: https://martinfowler.com/eaaCatalog/unitOfWork.html
