@@ -16,9 +16,6 @@ namespace SolidStack.Core.Equality.Internal
         private static BindingFlags AllInstanceMembersBindingFlags =>
             BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
 
-        private static MethodInfo ObjectEqualsMethod { get; } =
-            new Func<object, object, bool>(Equals).GetMethodInfo();
-
         public static IEqualityComparer<T> Create<T>(
             Func<IEnumerable<MemberInfo>, IEnumerable<MemberInfo>> memberSelector)
             where T : class =>
@@ -61,10 +58,11 @@ namespace SolidStack.Core.Equality.Internal
 
             var memberType = xMemberExpr.Type;
 
-            // We create an expression that invoke Enumerable.SequenceEqual if obj is a sequence or object.Equals if not.
-            if (!xMemberExpr.Type.GetTypeInfo().IsValueType)
+            // If the member is a reference type, \
+            if (!memberType.GetTypeInfo().IsValueType)
+                // we create an expression that invoke Enumerable.SequenceEqual if obj is a sequence or obj.Equals otherwise.
                 return IsSequenceType(memberType)
-                    ? MakeSequenceTypeEqualExpression(xMemberExpr, yMemberExpr, memberType)
+                    ? MakeSequenceTypeEqualExpression(xMemberExpr, yMemberExpr)
                     : MakeReferenceTypeEqualExpression(xMemberExpr, yMemberExpr);
 
             var xMemberAsObjExpr = Expression.Convert(xMemberExpr, typeof(object));
@@ -76,28 +74,18 @@ namespace SolidStack.Core.Equality.Internal
         private static Func<T, T, bool> MakeEqualsMethod<T>(IEnumerable<MemberInfo> members)
         {
             // We create the method parameters.
-            var xParamAsObjExpr = Expression.Parameter(typeof(object), "x");
-            var yParamAsObjExpr = Expression.Parameter(typeof(object), "y");
+            var xParamExpr = Expression.Parameter(typeof(T), "x");
+            var yParamExpr = Expression.Parameter(typeof(T), "y");
 
-            // We cast the parameters to the concrete type.
-            var xParamExpr = Expression.Convert(xParamAsObjExpr, typeof(T));
-            var yParamExpr = Expression.Convert(xParamAsObjExpr, typeof(T));
-
-            // We create the AND expression using short-circuit evaluation.
+            // We create the AND chain expression using short-circuit evaluation.
             var equalsExprs = members.Select(member => MakeEqualsExpression(member, xParamExpr, yParamExpr));
             var andChainExpr = equalsExprs.Aggregate((Expression) Expression.Constant(true), Expression.AndAlso);
 
-            // We use Object.Equals if second parameter doesn't match type.
-            var objectEqualsExpr = Expression.Equal(xParamAsObjExpr, yParamAsObjExpr);
-            var typedEqualsOrUntypedEqualsExpr = Expression.Condition(
-                Expression.TypeIs(yParamAsObjExpr, typeof(T)),
-                andChainExpr,
-                objectEqualsExpr);
+            // We compile the AND chain expression into a function.
+            var andChainFunc = Expression.Lambda<Func<T, T, bool>>(andChainExpr, xParamExpr, yParamExpr).Compile();
 
-            // We compile the lambda expression into a function.
-            return Expression.Lambda<Func<T, T, bool>>(
-                    typedEqualsOrUntypedEqualsExpr, xParamAsObjExpr, yParamAsObjExpr)
-                .Compile();
+            // We returns false if the types are different or we evaluate the AND chain otherwise.
+            return (x, y) => x.GetType() == y.GetType() && andChainFunc(x, y);
         }
 
         private static Expression MakeGetHashCodeExpression(MemberInfo member, Expression obj)
@@ -107,7 +95,7 @@ namespace SolidStack.Core.Equality.Internal
 
             var memberType = memberExpr.Type;
 
-            // We create an expression that invoke EnumerableExtensions.GetSequenceHashCode if obj is a sequence or obj.GetHashCode if not.
+            // We create an expression that invoke EnumerableExtensions.GetSequenceHashCode if obj is a sequence or obj.GetHashCode otherwise.
             var getHashCodeExpr = IsSequenceType(memberType)
                 ? MakeSequenceTypeGetHashCodeExpression(memberExpr)
                 : MakeReferenceTypeGetHashCodeExpression(memberAsObjExpr);
@@ -117,35 +105,35 @@ namespace SolidStack.Core.Equality.Internal
                 Expression.ReferenceEqual(Expression.Constant(null), memberAsObjExpr),
                 // we return 0 \
                 Expression.Constant(0),
-                // otherwise we invoke obj.GetHashCode or we GetSequenceHashCode if obj is a sequence.
+                // otherwise we invoke obj.GetHashCode or GetSequenceHashCode if obj is a sequence.
                 getHashCodeExpr);
         }
 
         private static Func<T, int> MakeGetHashCodeMethod<T>(IEnumerable<MemberInfo> members)
         {
             // We create the methhod parameter.
-            var objParamAsObjExpr = Expression.Parameter(typeof(object), "obj");
+            var objParamExpr = Expression.Parameter(typeof(T), "obj");
 
-            // We cast the parameter to the concrete type.
-            var objParamExpr = Expression.Convert(objParamAsObjExpr, typeof(T));
-
-            // We create the XOR expression.
+            // We create the XOR chain expression.
             var getHashCodeExprs = members.Select(member => MakeGetHashCodeExpression(member, objParamExpr));
             var xorChainExpr =
                 getHashCodeExprs.Aggregate((Expression) Expression.Constant(HashCodeSeed), LinkHashCodeExpression);
 
-            // We compile the expression into a function.
-            return Expression.Lambda<Func<T, int>>(xorChainExpr, objParamAsObjExpr).Compile();
+            // We compile the XOR chain expression into a function.
+            var xorChainFunc = Expression.Lambda<Func<T, int>>(xorChainExpr, objParamExpr).Compile();
+
+            // We apply the XOR operator to the hash code of the given object type and the XOR chain.
+            return obj => obj.GetType().GetHashCode() ^ xorChainFunc(obj);
         }
 
         private static Expression MakeReferenceTypeEqualExpression(Expression x, Expression y) =>
-            Expression.Call(ObjectEqualsMethod, x, y);
+            Expression.Call(typeof(object), "Equals", Type.EmptyTypes, x, y);
 
         private static Expression MakeReferenceTypeGetHashCodeExpression(Expression obj) =>
             Expression.Call(obj, "GetHashCode", Type.EmptyTypes);
 
-        private static Expression MakeSequenceTypeEqualExpression(Expression x, Expression y, Type enumerableType) =>
-            Expression.Call(typeof(Enumerable), "SequenceEqual", new[] {enumerableType}, x, y);
+        private static Expression MakeSequenceTypeEqualExpression(Expression x, Expression y) => 
+            Expression.Call(typeof(EnumerableExtensions), "SequenceEqual", Type.EmptyTypes, x, y);
 
         private static Expression MakeSequenceTypeGetHashCodeExpression(Expression obj) =>
             Expression.Call(typeof(EnumerableExtensions), "GetSequenceHashCode", Type.EmptyTypes, obj);

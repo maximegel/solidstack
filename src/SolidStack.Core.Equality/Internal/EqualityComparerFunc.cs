@@ -22,8 +22,6 @@ namespace SolidStack.Core.Equality.Internal
             ReferenceEquals(x, y) ||
             // False if only one object is null.
             !(x is null) && !(y is null) &&
-            // False if both types are different.
-            x.GetType() == y.GetType() &&
             // True if the delegate function validate the equality.
             EqualsFunc(x, y);
 

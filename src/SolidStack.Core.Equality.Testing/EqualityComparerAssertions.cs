@@ -18,7 +18,7 @@ namespace SolidStack.Core.Equality.Testing
         {
             Execute.Assertion
                 .BecauseOf(because, becauseArgs)
-                .Given(() => new Mock<T>().Object)
+                .Given(Mock.Of<T>)
                 .ForCondition(dummy => Subject.Equals(dummy, dummy))
                 .FailWith(
                     "Expected {context:comparer} to evaluate the equality of the same object as {0}{reason}, but found {1}.",
@@ -27,20 +27,7 @@ namespace SolidStack.Core.Equality.Testing
                 .ForCondition(dummy => !Subject.Equals(null, dummy) && !Subject.Equals(dummy, null))
                 .FailWith(
                     "Expected {context:comparer} to evaluate the equality of null and a non-null object as {0}{reason}, but found {1}.",
-                    false, true)
-                .Then
-                .Given(_ =>
-                {
-                    var xStub = new Mock<T>();
-                    var yStub = new Mock<T>();
-
-                    xStub.Setup(obj => obj.GetType()).Returns(typeof(object));
-
-                    return new[] {xStub.Object, yStub.Object};
-                })
-                .ForCondition(stubs => Subject.Equals(stubs[0], stubs[1]))
-                .FailWith("Expected {context:comparer} to evaluate the equality of objects with a different type as {0}{reason}, but found {1}.",
-                    true, false);
+                    false, true);
 
             return new AndConstraint<EqualityComparerAssertions<T>>(this);
         }
@@ -61,7 +48,7 @@ namespace SolidStack.Core.Equality.Testing
                 .Given(() => new[] {Subject.GetHashCode(x), Subject.GetHashCode(y)})
                 .ForCondition(hashCodes => hashCodes[0] != hashCodes[1])
                 .FailWith(
-                    "Expected {context:comparer} to return the same hash code for {0} and {1}{reason}, but found {2} and {3}.",
+                    "Expected {context:comparer} to return different hash codes for {0} and {1}{reason}, but found {2} and {3}.",
                     _ => xCopy, _ => yCopy, hashCodes => hashCodes[0], hashCodes => hashCodes[1]);
 
             return new AndConstraint<EqualityComparerAssertions<T>>(this);
@@ -83,7 +70,7 @@ namespace SolidStack.Core.Equality.Testing
                 .Given(() => new[] {Subject.GetHashCode(x), Subject.GetHashCode(y)})
                 .ForCondition(hashCodes => hashCodes[0] == hashCodes[1])
                 .FailWith(
-                    "Expected {context:comparer} to return the same has code for {0} and {1}{reason}, but found {2} and {3}.",
+                    "Expected {context:comparer} to return the same hash code for {0} and {1}{reason}, but found {2} and {3}.",
                     _ => xCopy, _ => yCopy, hashCodes => hashCodes[0], hashCodes => hashCodes[1]);
 
             return new AndConstraint<EqualityComparerAssertions<T>>(this);

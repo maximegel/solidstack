@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="SolidStack.Core.Equality.nuspec" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SolidStack.Core.Guards\SolidStack.Core.Guards.csproj" />
   </ItemGroup>
 

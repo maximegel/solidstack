@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>SolidStack.Core.Equality</id>
+    <version>$version$</version>
+    <description>SolidStack.Core.Equality is primarily useful when you have to tweak the equality of an object to implement the Value Object Pattern. All you have to do is use one of the provided abstract classes and the complex equality logic will be done for you.</description>
+    <authors>$authors$</authors>
+    <title>$title$</title>
+    <projectUrl>$projectUrl$</projectUrl>
+    <licenseUrl>$licenseUrl$</licenseUrl>
+    <iconUrl>$iconUrl$</iconUrl>
+    <requireLicenseAcceptance>$requireLicenseAcceptance$</requireLicenseAcceptance>
+    <!--<releaseNotes>$releaseNotes$</releaseNotes>-->
+    <copyright>$copyright$</copyright>
+    <tags>SolidStack Equality</tags>
+    <dependencies>
+      <dependency id="SolidStack.Core.Guards" version="$version$"/>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\$configuration$\netstandard2.0\SolidStack.Core.Equality.dll" target="lib\netstandard2.0"/>
+  </files>
+</package>
