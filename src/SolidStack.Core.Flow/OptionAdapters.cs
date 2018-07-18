@@ -196,7 +196,7 @@ namespace SolidStack.Core.Flow
         {
             Guard.RequiresNonNull(sequence, nameof(sequence));
 
-            return sequence.SelectMany(option => option.AsEnumerable()).ToList();
+            return sequence.SelectMany(option => option.AsEnumerable());
         }
 
         /// <summary>

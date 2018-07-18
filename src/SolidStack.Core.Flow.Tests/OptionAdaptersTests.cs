@@ -141,7 +141,9 @@ namespace SolidStack.Core.Flow.Tests
             var sequence = new[] {4, -1, 5, -3};
             var values = sequence.WhereSome(x => x >= 0 ? Option.Some(x) : Option.None<int>());
 
-            values.Should().HaveCount(2).And.ContainInOrder(4, 5);
+            values.Should()
+                .HaveCount(2)
+                .And.ContainInOrder(4, 5);
         }
     }
 }
