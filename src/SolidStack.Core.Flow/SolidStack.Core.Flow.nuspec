@@ -14,7 +14,7 @@
     <copyright>$copyright$</copyright>
     <tags>SolidStack Flow OptionPattern ResultPattern EitherPattern RailwayOrientedProgramming FunctionalProgramming</tags>
     <dependencies>
-      <dependency id="SolidStack.Core.Guards" version="1.0.0"/>
+      <dependency id="SolidStack.Core.Guards" version="$version$"/>
     </dependencies>
   </metadata>
   <files>
