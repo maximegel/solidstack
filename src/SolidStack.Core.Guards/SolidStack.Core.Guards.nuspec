@@ -3,7 +3,7 @@
   <metadata>
     <id>SolidStack.Core.Guards</id>
     <version>$version$</version>
-    <description>SolidStack.Core.Guards is an extremely simple, unambiguous and lightweight guard clause library.</description>
+    <description>SolidStack.Core.Guards is an extremely simple, unambiguous and lightweight guard clause library that allow you to write pre-conditions and post-conditions for your methods in a readable way.</description>
     <authors>$authors$</authors>
     <title>$title$</title>
     <projectUrl>$projectUrl$</projectUrl>
