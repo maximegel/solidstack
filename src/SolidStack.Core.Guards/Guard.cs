@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using JetBrains.Annotations;
 
 namespace SolidStack.Core.Guards
 {
@@ -27,11 +28,15 @@ namespace SolidStack.Core.Guards
         /// <param name="message">The error message to display.</param>
         /// <exception cref="GuardClauseException">If the specified condition is not satisfied.</exception>
         [Conditional("DEBUG")]
-        public static void Ensures(Func<bool> predicate, string message) =>
+        public static void Ensures(Func<bool> predicate, string message)
+        {
+
             Assert(predicate, message);
+        }
 
         /// <summary>
-        ///     Checks for a method post-condition against all items in a sequence; if any condition is false, throws an exception that should never be catch.
+        ///     Checks for a method post-condition against all items in a sequence; if any condition is false, throws an exception
+        ///     that should never be catch.
         /// </summary>
         /// <remarks>
         ///     Run in "debug" mode only to not affect performance.
@@ -48,7 +53,8 @@ namespace SolidStack.Core.Guards
             Assert(() => sequence.All(predicate), message);
 
         /// <summary>
-        ///     Checks for a method post-condition against all items in a sequence; if all conditions are false, throws an exception that should never be catch.
+        ///     Checks for a method post-condition against all items in a sequence; if all conditions are false, throws an
+        ///     exception that should never be catch.
         /// </summary>
         /// <remarks>
         ///     Run in "debug" mode only to not affect performance.
@@ -65,7 +71,8 @@ namespace SolidStack.Core.Guards
             Ensures(() => sequence.Any(predicate), message);
 
         /// <summary>
-        ///     Checks if a value is null as a method post-condition; if the value is null, throws an exception that should never be catch.
+        ///     Checks if a value is null as a method post-condition; if the value is null, throws an exception that should never
+        ///     be catch.
         /// </summary>
         /// <remarks>
         ///     Run in "debug" mode only to not affect performance.
@@ -74,12 +81,17 @@ namespace SolidStack.Core.Guards
         /// <param name="value">The value to check.</param>
         /// <param name="message">The error message to display.</param>
         /// <exception cref="GuardClauseException">If the given value is null.</exception>
+        [AssertionMethod]
         [Conditional("DEBUG")]
-        public static void EnsuresNonNull<T>(T value, string message) =>
+        public static void EnsuresNonNull<T>(
+            [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration]
+            T value,
+            string message) =>
             Ensures(() => value != null, message);
 
         /// <summary>
-        ///     Checks if a sequence contains null items as a method post-condition; if any item is null, throws an exception that should never be catch.
+        ///     Checks if a sequence contains null items as a method post-condition; if any item is null, throws an exception that
+        ///     should never be catch.
         /// </summary>
         /// <remarks>
         ///     Run in "debug" mode only to not affect performance.
@@ -102,7 +114,8 @@ namespace SolidStack.Core.Guards
             Assert(predicate, message);
 
         /// <summary>
-        ///     Checks for a method pre-condition against all items in a sequence; if any condition is false, throws an exception that should never be catch.
+        ///     Checks for a method pre-condition against all items in a sequence; if any condition is false, throws an exception
+        ///     that should never be catch.
         /// </summary>
         /// <remarks>
         ///     Run in "debug" mode only to not affect performance.
@@ -119,7 +132,8 @@ namespace SolidStack.Core.Guards
             Assert(() => sequence.All(predicate), message);
 
         /// <summary>
-        ///     Checks for a method pre-condition against all items in a sequence; if all conditions are false, throws an exception that should never be catch.
+        ///     Checks for a method pre-condition against all items in a sequence; if all conditions are false, throws an exception
+        ///     that should never be catch.
         /// </summary>
         /// <remarks>
         ///     Run in "debug" mode only to not affect performance.
@@ -136,17 +150,23 @@ namespace SolidStack.Core.Guards
             Requires(() => sequence.Any(predicate), message);
 
         /// <summary>
-        ///     Checks if a value is null as a method post-condition; if the value is null, throws an exception that should never be catch.
+        ///     Checks if a value is null as a method post-condition; if the value is null, throws an exception that should never
+        ///     be catch.
         /// </summary>
         /// <typeparam name="T">The type of the value to check.</typeparam>
         /// <param name="value">The value to check.</param>
         /// <param name="variableName">The variable name of the value to check.</param>
         /// <exception cref="GuardClauseException">If the given value is null.</exception>
-        public static void RequiresNonNull<T>(T value, string variableName) =>
+        [AssertionMethod]
+        public static void RequiresNonNull<T>(
+            [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration]
+            T value,
+            string variableName) =>
             Requires(() => value != null, $"Receiving null {variableName}.");
 
         /// <summary>
-        ///     Checks if a sequence contains null items as a method pre-condition; if any item is null, throws an exception that should never be catch.
+        ///     Checks if a sequence contains null items as a method pre-condition; if any item is null, throws an exception that
+        ///     should never be catch.
         /// </summary>
         /// <remarks>
         ///     Run in "debug" mode only to not affect performance.

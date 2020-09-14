@@ -9,24 +9,24 @@ namespace SolidStack.Core.Equality.Internal
 
         private const int HashCodeMultiplier = 89;
 
-        public static int GetSequenceHashCode(this IEnumerable @this)
+        public static int GetSequenceHashCode(this IEnumerable source)
         {
-            if (@this is null)
+            if (source is null)
                 return 0;
 
             unchecked
             {
-                return @this.Cast<object>().Aggregate(HashCodeSeed,
+                return source.Cast<object>().Aggregate(HashCodeSeed,
                     (current, o) => (current * HashCodeMultiplier) ^ (o?.GetHashCode() ?? 0));
             }
         }
 
-        public static bool SequenceEqual(this IEnumerable @this, IEnumerable other) =>
+        public static bool SequenceEqual(this IEnumerable source, IEnumerable other) =>
             // True if both references are equal.
-            ReferenceEquals(@this, other) ||
+            ReferenceEquals(source, other) ||
             // False if only one sequence is null.
-            !(@this is null) && !(other is null) &&
+            !(source is null) && !(other is null) &&
             // True if all members of both sequences are equal.
-            Enumerable.SequenceEqual(@this.Cast<object>(), other.Cast<object>());
+            Enumerable.SequenceEqual(source.Cast<object>(), other.Cast<object>());
     }
 }

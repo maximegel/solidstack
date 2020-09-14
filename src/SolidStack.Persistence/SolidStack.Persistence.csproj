@@ -13,8 +13,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="5.3.2" />
-    <PackageReference Include="Moq" Version="4.8.2" />
+    <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SolidStack.Core.Collections\SolidStack.Core.Collections.csproj" />
+    <ProjectReference Include="..\SolidStack.Core.Flow\SolidStack.Core.Flow.csproj" />
+    <ProjectReference Include="..\SolidStack.Core.Guards\SolidStack.Core.Guards.csproj" />
   </ItemGroup>
 
 </Project>
